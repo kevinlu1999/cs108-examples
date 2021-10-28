@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # add this line into the list of urlpatterns
     path('', include('hello_world.urls')),
+    path('pages/', include('pages.urls')),  # add this new URL include
 ]
