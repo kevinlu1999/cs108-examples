@@ -1,1 +1,1 @@
-https://pacific-savannah-65937.herokuapp.com/
+https://pacific-savannah-65937.herokuapp.com/pages/
