@@ -1,0 +1,19 @@
+<!-- mini_fb/show_all_profiles.html -->
+{% block content %}
+<h1>MiniFacebook</h1>
+<h2>Showing all Profiles</h2>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Hometown</th>
+        <th>Image</th>
+    </tr>
+    {% for p in profiles %}
+    <tr>
+        <td>{{p.first_name}} {{p.last_name}}</td>
+        <td>{{p.city}} </td>
+        <td> <img src="{{p.profile_image_url}}" style="max-height: 150px;" /> </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

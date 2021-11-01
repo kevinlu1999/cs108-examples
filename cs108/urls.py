@@ -21,4 +21,5 @@ urlpatterns = [
     # add this line into the list of urlpatterns
     path('', include('hello_world.urls')),
     path('pages/', include('pages.urls')),  # add this new URL include
+    path('mini_fb/', include('mini_fb.urls')),
 ]
