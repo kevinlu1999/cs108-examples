@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+import datetime
 
 
 # Create your models here.
@@ -8,12 +10,16 @@ class Profile(models.Model):
     city = models.CharField(max_length=40)
     email_address = models.CharField(max_length=45)
     profile_image_url = models.URLField(blank=True)
+    birth_date = models.DateField(default=datetime.datetime(1994, 1, 1))
 
     def __str__(self):
         return "{}, {}, {}, {}, {}".format(self.first_name, self.last_name, self.city, self.email_address, self.profile_image_url)
 
     def get_status_messages(self):
         return StatusMessage.objects.filter(profile=self)
+
+    def get_absolute_url(self):
+        return reverse('show_profile_page', kwargs={'pk': self.pk})
 
 
 class StatusMessage(models.Model):
