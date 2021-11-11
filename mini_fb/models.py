@@ -30,11 +30,3 @@ class StatusMessage(models.Model):
 
     def __str__(self):
         return '{}, {}, {}'.format(self.timestamp, self.message, self.profile)
-
-
-class Image(models.Model):
-    profile_image_url = models.URLField(blank=True)
-    profile = models.ForeignKey('Profile', on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.profile_image_url

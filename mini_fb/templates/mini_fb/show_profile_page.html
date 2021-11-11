@@ -53,9 +53,9 @@
     <tr>
         <td style="width: 200px">{{m.timestamp}}</td>
         <td>{{m.message}}
+            <br>
             {% if m.image %}
             <img src='{{m.image.url}}' style='max-width: 600;'>
-            {% else %} wtf
             {% endif %}
         </td>
     </tr>
