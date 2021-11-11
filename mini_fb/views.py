@@ -37,13 +37,16 @@ class UpdateProfileView(UpdateView):
 
 def post_status_message(request, pk):
     if request.method == 'POST':
-        form = CreateStatusMessageForm(request.POST or None)
+        form = CreateStatusMessageForm(request.POST or None, request.FILES or None)
+        profile = Profile.objects.get(pk=pk)
         if form.is_valid():
             status_message = form.save(commit=False)
-            profile = Profile.objects.get(pk=pk)
+            image = form.save(commit=False)
             status_message.profile = profile
-            status_message.save()  # now commit to database
-
-    # redirect the user to the show_profile_page view
+            image.profile = profile
+            image.save()
+            status_message.save()
+        else:
+            print("Error: the form was not valid")
     url = reverse('show_profile_page', kwargs={'pk': pk})
     return redirect(url)
