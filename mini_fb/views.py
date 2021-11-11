@@ -1,7 +1,8 @@
 from django.shortcuts import redirect
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse
-from .models import Profile
+from django.views.generic.edit import DeleteView
+from .models import Profile, StatusMessage
 from .forms import CreateProfileForm, UpdateProfileForm, CreateStatusMessageForm
 
 
@@ -37,7 +38,8 @@ class UpdateProfileView(UpdateView):
 
 def post_status_message(request, pk):
     if request.method == 'POST':
-        form = CreateStatusMessageForm(request.POST or None, request.FILES or None)
+        form = CreateStatusMessageForm(
+            request.POST or None, request.FILES or None)
         profile = Profile.objects.get(pk=pk)
         if form.is_valid():
             status_message = form.save(commit=False)
@@ -50,3 +52,23 @@ def post_status_message(request, pk):
             print("Error: the form was not valid")
     url = reverse('show_profile_page', kwargs={'pk': pk})
     return redirect(url)
+
+
+class DeleteStatusMessageView(DeleteView):
+    template_name = "mini_fb/delete_status_form.html"
+    queryset = StatusMessage.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(DeleteStatusMessageView,
+                        self).get_context_data(**kwargs)
+        st_msg = StatusMessage.objects.get(pk=self.kwargs['status_pk'])
+        context['st_msg'] = st_msg
+        return context
+
+    def get_object(self):
+        return StatusMessage.objects.get(pk=self.kwargs['status_pk'])
+
+    def get_success_url(self):
+        profile_pk = self.kwargs['profile_pk']
+        url = reverse('show_profile_page', kwargs={'pk': profile_pk})
+        return url

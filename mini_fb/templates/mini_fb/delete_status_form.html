@@ -1,0 +1,28 @@
+<!-- templates/delete__status.html-->
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+<h2> Are you sure you want to delete this status?</h2>
+
+<form method='POST' style="display: inline;">
+    {% csrf_token %}
+    <input type='submit' name="yes" value="Yes">
+</form>
+<form method='GET' action="{% url 'show_profile_page' st_msg.profile.pk %}" style="display: inline;">
+    {% csrf_token %}
+    <input type='submit' name="no" value="No">
+</form>
+
+<table>
+    <tr>
+        <td style="width: 200px">{{st_msg.timestamp}}</td>
+        <td>{{st_msg.message}}
+            <br>
+            {% if st_msg.image %}
+            <img src='{{st_msg.image.url}}' style='max-width: 600;'>
+            {% endif %}
+        </td>
+    </tr>
+</table>
+
+{% endblock %}

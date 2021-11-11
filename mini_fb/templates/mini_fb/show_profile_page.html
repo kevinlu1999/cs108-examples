@@ -45,10 +45,6 @@
 
 <h2>{{profile.first_name}}'s Story</h2>
 <table>
-    <tr>
-        <th>Time</th>
-        <th>Message</th>
-    </tr>
     {% for m in profile.get_status_messages %}
     <tr>
         <td style="width: 200px">{{m.timestamp}}</td>
@@ -57,6 +53,9 @@
             {% if m.image %}
             <img src='{{m.image.url}}' style='max-width: 600;'>
             {% endif %}
+        </td>
+        <td>
+            <a href="{% url 'delete_status' profile_pk=profile.pk status_pk=m.pk %}">Delete</a>
         </td>
     </tr>
     {% endfor %}
