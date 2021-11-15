@@ -8,8 +8,9 @@
         <td>
             <img src="{{profile.profile_image_url}}" style="height: 222px;">
             <br>
-            <a href="{% url 'update_profile' profile.pk %}">Edit this profile</a> | 
-            <a href="{% url 'news_feed' profile.pk %}">Show {{profile.first_name}}'s news feed</a>
+            <a href="{% url 'update_profile' profile.pk %}">Edit this profile</a> |
+            <a href="{% url 'news_feed' profile.pk %}">Show {{profile.first_name}}'s news feed</a> |
+            <a href="{%url 'show_possible_friends' profile.pk %}">Find friends</a>
         </td>
         <td>
             <table>
@@ -68,8 +69,12 @@
 {% for profile in profile.get_friends %}
 <table>
     <tr>
-        <td><a href="{% url 'show_profile_page' profile.pk %}"></a>{{profile.first_name}} {{profile.last_name}}</td>
-        <td><img src="{{profile.profile_image_url}}" style="width: 50px; height: 60px;"></td>
+        <td>
+            <a href="{% url 'show_profile_page' profile.pk %}">{{profile.first_name}} {{profile.last_name}}</a>
+        </td>
+        <td>
+            <img src="{{profile.profile_image_url}}" style="width: 50px; height: 60px;">
+        </td>
     </tr>
 </table>
 {% endfor %}

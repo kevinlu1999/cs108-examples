@@ -78,3 +78,17 @@ class ShowNewsFeedView(DetailView):
     model = Profile
     template_name = "mini_fb/show_news_feed.html"
     context_object_name = "profile"
+
+
+class ShowPossibleFriendsView(DetailView):
+    model = Profile
+    template_name = "mini_fb/show_possible_friends.html"
+    context_object_name = "profile"
+
+
+def add_friend(request, profile_pk, friend_pk):
+        profile = Profile.objects.get(pk = profile_pk)
+        friend = Profile.objects.get(pk = friend_pk)
+        profile.friends.add(friend)
+        profile.save()
+        return redirect(reverse('show_profile_page', kwargs={'pk': profile_pk}))

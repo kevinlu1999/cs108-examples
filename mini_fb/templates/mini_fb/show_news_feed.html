@@ -2,13 +2,16 @@
 {% extends 'mini_fb/base.html' %}
 {% block content %}
 <hr>
-<td><a href="{% url 'show_profile_page' profile.pk %}">Back to {{profile.first_name}}'s profile page</a></td>
+<a href="{% url 'show_profile_page' profile.pk %}">Back to {{profile.first_name}}'s profile page</a>
 <h2>{{profile.first_name}}'s News Feed</h2>
 <table>
     {% for status_message in profile.get_news_feed %}
     <tr>
         <td>{{status_message.timestamp}}</td>
-        <td>{{status_message.profile.first_name}} {{status_message.profile.last_name}}</td>
+        <td>
+            <a href="{% url 'show_profile_page' status_message.profile.pk %}">
+                {{status_message.profile.first_name}} {{status_message.profile.last_name}}</a>
+        </td>
         <td><img src='{{status_message.profile.profile_image_url}}'></td>
         <td>{{status_message.message}}</td>
     </tr>

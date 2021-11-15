@@ -29,6 +29,10 @@ class Profile(models.Model):
         friends = self.friends.all()
         return StatusMessage.objects.filter(profile__in=friends).order_by("-timestamp")
 
+    def get_friend_suggestions(self):
+        possible_friends = Profile.objects.exclude(pk__in=self.get_friends())
+        return possible_friends
+
 
 class StatusMessage(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
