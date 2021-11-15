@@ -72,3 +72,9 @@ class DeleteStatusMessageView(DeleteView):
         profile_pk = self.kwargs['profile_pk']
         url = reverse('show_profile_page', kwargs={'pk': profile_pk})
         return url
+
+
+class ShowNewsFeedView(DetailView):
+    model = Profile
+    template_name = "mini_fb/show_news_feed.html"
+    context_object_name = "profile"
