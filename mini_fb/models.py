@@ -11,6 +11,7 @@ class Profile(models.Model):
     email_address = models.CharField(max_length=45)
     profile_image_url = models.URLField(blank=True)
     birth_date = models.DateField(default=datetime.datetime(1994, 1, 1))
+    friends = models.ManyToManyField("self")
 
     def __str__(self):
         return "{}, {}, {}, {}, {}".format(self.first_name, self.last_name, self.city, self.email_address, self.profile_image_url)
@@ -20,6 +21,9 @@ class Profile(models.Model):
 
     def get_absolute_url(self):
         return reverse('show_profile_page', kwargs={'pk': self.pk})
+
+    def get_friends(self):
+        return self.friends.all()
 
 
 class StatusMessage(models.Model):
