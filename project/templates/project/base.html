@@ -1,0 +1,27 @@
+<!-- project/base.html -->
+<html>
+<head>
+    <title>Project - NBA Standings</title>
+    <style>
+        table {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Project - NBA Standings</h1>
+        <a href="{% url 'show_all_teams' %}">Standings</a>
+        <span> | </span>
+        <a href="{% url 'create_game' %}">Add Game</a>
+        <span> | </span>
+        <a href="{% url 'create_team' %}">Add Team</a>
+        <span> | </span>
+        <a href="{% url 'create_player' %}">Add Player</a>
+    </header>
+    {% block content %}
+    {% endblock %}
+</body>
+
+</html>

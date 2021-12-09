@@ -1,0 +1,12 @@
+<!-- templates/project/create_team_form.html -->
+<h1>Creating a new team</h1>
+<form method="POST" action="{% url 'add_team' %}">
+    {% csrf_token %}
+    <table>
+        {{form.as_table}}
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Add Team!"></td>
+        </tr>
+    </table>
+</form>

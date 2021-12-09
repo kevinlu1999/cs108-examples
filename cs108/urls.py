@@ -24,7 +24,8 @@ urlpatterns = [
     path('', include('hello_world.urls')),
     path('pages/', include('pages.urls')),  # add this new URL include
     path('mini_fb/', include('mini_fb.urls')),
+    path('project/', include('project.urls'))
 ]
 
 # for displaying local image files!!!
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

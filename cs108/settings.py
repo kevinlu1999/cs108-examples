@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'hello_world.apps.HelloWorldConfig',
     'pages.apps.PagesConfig',   ## add this new app
-    'mini_fb.apps.MiniFbConfig'
+    'mini_fb.apps.MiniFbConfig',
+    'project.apps.ProjectConfig'
 ]
 
 MIDDLEWARE = [

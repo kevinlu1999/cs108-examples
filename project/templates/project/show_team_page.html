@@ -1,0 +1,56 @@
+<!-- project/show_team_page.html -->
+{% extends 'project/base.html' %}
+
+{% block content %}
+<img src="{{team.image_url}}" style="height: 50px;">
+<h2 style="display: inline;">{{team.name}} Roster</h2>
+<h3>Team Roster</h3>
+<table>
+    <tr>
+        <th>Photo</th>
+        <th>Name</th>
+        <th>Number</th>
+        <th>Position</th>
+    </tr>
+    {% for p in team.get_team_players %}
+    <tr>
+        <td><img src='{{p.image_url}}' style="height: 50px;" /></td>
+        <td>{{p.name}}</td>
+        <td>{{p.number}}</td>
+        <td>{{p.position}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h3>Games History</h3>
+<table>
+    <tr>
+        <th>Date</th>
+        <th>Home Team</th>
+        <th></th>
+        <th>Away Team</th>
+        <th>Win / Loss</th>
+    </tr>
+    {% for g in team.get_game_history %}
+    <tr>
+        <td>{{g.date}}</td>
+        <td>{{g.home_team}} ({{g.home_score}})</td>
+        <td>:</td>
+        <td>{{g.away_team}} ({{g.away_score}})</td>
+        {% if team.name == g.home_team %}
+            {% if g.home_score > g.away_score %}
+                <td>W</td>
+            {% else %}
+                <td>L</td>
+            {% endif %}
+        {% else %}
+            {% if g.home_score > g.away_score %}
+                <td>L</td>
+            {% else %}
+                <td>W</td>
+            {% endif %}
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

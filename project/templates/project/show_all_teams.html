@@ -1,0 +1,26 @@
+<!-- project/show_all_teams.html -->
+{% extends 'project/base.html' %}
+{% block content %}
+<h2>Showing all Teams</h2>
+<table>
+    <tr>
+        <th>Team Name</th>
+        <th>Win</th>
+        <th>Loss</th>
+        <th>Win Rate</th>
+    </tr>
+    {% for t in teams %}
+    <tr>
+        <td>
+            <a href="{% url 'show_team_page' t.pk %}">
+                <img src="{{t.image_url}}" style="max-height: 50px;" />
+                {{t.name}}
+            </a>
+        </td>
+        <td>{{t.wins}} </td>
+        <td>{{t.losses}}</td>
+        <td>{{t.win_rate}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
